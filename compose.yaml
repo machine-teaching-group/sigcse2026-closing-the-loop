@@ -1,0 +1,168 @@
+version: '3.8'
+
+services:
+  backend-orchestration:
+    build: ./backend_orchestration
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./logs_Docker/orchestration:/app/logs
+    env_file:
+      - ./backend_orchestration/.env
+    environment:
+      IN_DOCKER: "1"
+      RUN_DB_MIGRATIONS: "1"
+      RUN_DB_MAKEMIGRATIONS: "1"
+    depends_on:
+      postgresdb:
+        condition: service_healthy
+      backend-hint:
+        condition: service_healthy
+      backend-problem-handler:
+        condition: service_healthy
+    networks:
+      - backendnet
+
+  backend-problem-handler:
+    build: ./backend_problem_handler
+    ports:
+      - "8002:8002"
+    env_file:
+      - ./backend_problem_handler/.env
+    environment:
+      IN_DOCKER: "1"
+      RUN_DB_MIGRATIONS: "1"
+      RUN_DB_MAKEMIGRATIONS: "1"
+      LOG_FILE_PREFIX: "web_"
+    volumes:
+      - ./logs_Docker/problem_handler-web:/app/logs
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      postgresdb:
+        condition: service_healthy
+    networks:
+      - backendnet
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import socket,sys; s=socket.socket(); s.settimeout(1); s.connect(('localhost',8002)); s.close()\""]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
+
+  backend-hint:
+    build: ./backend_hint
+    ports:
+      - "8001:8001"
+    env_file:
+      - ./backend_hint/.env
+    environment:
+      IN_DOCKER: "1"
+      RUN_DB_MIGRATIONS: "1"
+      RUN_DB_MAKEMIGRATIONS: "1"
+      LOG_FILE_PREFIX: "web_"
+    volumes:
+      - ./logs_Docker/hint-web:/app/logs
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      postgresdb:
+        condition: service_healthy
+    networks:
+      - backendnet
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import socket,sys; s=socket.socket(); s.settimeout(1); s.connect(('localhost',8001)); s.close()\""]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
+  
+  backend-hint-worker:
+    build: ./backend_hint
+    command: python manage.py run_worker
+    env_file:
+      - ./backend_hint/.env
+    environment:
+      IN_DOCKER: "1"
+      # Avoid running migrations on workers to prevent duplicate concurrent runs
+      RUN_DB_MIGRATIONS: "0"
+      LOG_FILE_PREFIX: "worker_"
+    volumes:
+      - ./logs_Docker/hint-worker:/app/logs
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      postgresdb:
+        condition: service_healthy
+      backend-hint:
+        condition: service_healthy
+    networks:
+      - backendnet
+    deploy:
+      mode: replicated
+      replicas: 1 # adjust to control number of AI hint workers
+
+  backend-problem-handler-worker:
+    build: ./backend_problem_handler
+    command: python manage.py run_worker
+    env_file:
+      - ./backend_problem_handler/.env
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      postgresdb:
+        condition: service_healthy
+      backend-problem-handler:
+        condition: service_healthy
+    environment:
+      LOG_FILE_PREFIX: "worker_"
+    volumes:
+      - ./logs_Docker/problem_handler-worker:/app/logs
+    networks:
+      - backendnet
+    deploy:
+      mode: replicated
+      replicas: 1 # adjust to control number of problem handler workers
+
+  postgresdb:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-init:/docker-entrypoint-initdb.d:ro
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - backendnet
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  rabbitmq:
+    image: rabbitmq:4.2
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - backendnet
+
+networks:
+  backendnet:
+    driver: bridge
+
+volumes:
+  postgres-data:
+    driver: local

@@ -1,0 +1,11 @@
+Write a function factorial(n) that returns the factorial of a non-negative integer n.
+
+Requirements:
+- If n == 0, return 1.
+- For n > 0, return n * factorial(n-1) or an iterative equivalent.
+- Assume inputs are integers 0 <= n <= 12.
+
+Examples:
+- factorial(0) -> 1
+- factorial(3) -> 6
+- factorial(5) -> 120

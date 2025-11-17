@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "composite": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "incremental": true,
+    "jsx": "react",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": false,
+    "preserveWatchOutput": true,
+    "resolveJsonModule": true,
+  "outDir": "lib",
+  "rootDir": ".",
+    "strict": true,
+    "strictNullChecks": false,
+    "target": "ES2018",
+    "skipLibCheck": true
+  },
+  "include": [
+    "index.ts",
+    "src/**/*",
+    "src/**/*.json",
+    "user_customizable_configs/**/*",
+    "user_customizable_configs/**/*.json"
+  ]
+}

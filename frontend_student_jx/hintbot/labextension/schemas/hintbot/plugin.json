@@ -1,0 +1,27 @@
+{
+  "jupyter.lab.shortcuts": [],
+  "title": "hintbot",
+  "description": "hintbot settings.",
+  "type": "object",
+  "properties": {
+    "preReflection": {
+      "type": "boolean",
+      "title": "<deprecated>",
+      "description": "<deprecated>",
+      "default": true
+    },
+    "postReflection": {
+      "type": "boolean",
+      "title": "<deprecated>",
+      "description": "<deprecated>",
+      "default": true
+    },
+    "hintQuantity": {
+      "type": "number",
+      "title": "<deprecated>",
+      "description": "<deprecated>",
+      "default": 5
+    }
+  },
+  "additionalProperties": false
+}

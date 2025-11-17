@@ -1,0 +1,5 @@
+hint_quota:
+  max_planning_hints_per_problem: 1
+  max_debugging_hints_per_problem: 3
+  max_optimization_hints_per_problem: 1
+  max_hints_per_problem: None  # None means unlimited

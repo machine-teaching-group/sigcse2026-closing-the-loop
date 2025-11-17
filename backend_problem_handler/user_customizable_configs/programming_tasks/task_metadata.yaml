@@ -1,0 +1,38 @@
+version: 1
+
+tasks:
+  sum_two_numbers:
+    name: "Sum Two Numbers"
+    task_description_file: sum_two_numbers.txt
+    template_code_file: sum_two_numbers.py
+    test_template_file: test_template_1.py
+    test_case_files: sum_two_numbers.py
+    execution_dir: sum_two_numbers
+    timeout: 1
+  
+  factorial:
+    name: "Factorial"
+    task_description_file: factorial.txt
+    template_code_file: factorial.py
+    test_template_file: test_template_1.py
+    test_case_files: factorial/factorial*.py
+    execution_dir: factorial
+    timeout: 1
+  
+  count_vowels:
+    name: "Count Vowels"
+    task_description_file: count_vowels.txt
+    template_code_file: count_vowels.py
+    test_template_file: test_template_1.py
+    test_case_files: count_vowels.py
+    execution_dir: count_vowels
+    timeout: 1
+
+  read_file:
+    name: "Read File"
+    task_description_file: read_file.txt
+    template_code_file: read_file.py
+    test_template_file: test_template_1.py
+    test_case_files: read_file.py
+    execution_dir: read_file
+    timeout: 1

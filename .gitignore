@@ -1,0 +1,82 @@
+# OS/Editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Keep workflows tracked if present
+/.github/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*$py.class
+.Python
+*.egg-info/
+*.egg
+dist/
+build/
+pip-wheel-metadata/
+*.log
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Django (databases & runtime artefacts)
+db.sqlite3
+db.sqlite3-journal
+*.sqlite3
+media/
+staticfiles/
+static_root/
+tmp/
+
+# Environment/config caches
+.env*
+.envrc
+**/.env
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Node/Frontend
+node_modules/
+**/node_modules/
+**/dist/
+**/.parcel-cache/
+**/.next/
+**/.nuxt/
+**/out/
+**/.turbo/
+**/coverage/
+**/vite.config.timestamp-*
+
+# TypeScript caches
+*.tsbuildinfo
+**/.tsbuildinfo
+
+# Lockfiles (allow in repo) — do NOT ignore
+#! pnpm-lock.yaml
+#! yarn.lock
+#! package-lock.json
+
+# Project-specific
+latest.dump
+restore_db.sh
+/data
+/logs_Docker
+/tmp_output
+/*/logs/
+/logs/
+/.tests/
+/frontend_student_jx/example/*
+# Note: Django migrations should be tracked; do not ignore them

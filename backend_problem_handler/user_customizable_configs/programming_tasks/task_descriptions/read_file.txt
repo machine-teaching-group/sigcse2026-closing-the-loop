@@ -1,0 +1,1 @@
+Write a function called `read_file` which returns the content of the 'data.txt' file inside 'assets'.

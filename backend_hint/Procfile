@@ -1,0 +1,3 @@
+web: gunicorn backend_hint.wsgi --log-file -
+worker: python manage.py run_worker --queue=${TASK_QUEUE:-task_queue}
+release: python manage.py migrate --noinput && python manage.py collectstatic --noinput

@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Minimal custom styles for overlays */
+.screen-freeze::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.7);
+  z-index: 40;
+}
+
+/* Minimal readable markdown container without Tailwind apply */
+.prose-container h1 { margin-top: 1rem; margin-bottom: 0.5rem; font-size: 1.5rem; font-weight: 600; }
+.prose-container h2 { margin-top: 0.75rem; margin-bottom: 0.5rem; font-size: 1.25rem; font-weight: 600; }
+.prose-container h3 { margin-top: 0.75rem; margin-bottom: 0.5rem; font-size: 1.125rem; font-weight: 600; }
+.prose-container p { margin: 0.5rem 0; }
+.prose-container pre { margin: 0.5rem 0; background: #fafafa; padding: 0.75rem; overflow: auto; font-size: 0.9rem; }
+.prose-container ul { margin: 0.5rem 0; padding-left: 1.25rem; list-style: disc; }
+.prose-container ol { margin: 0.5rem 0; padding-left: 1.25rem; list-style: decimal; }

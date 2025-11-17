@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar for hint pane */
+.hint-scrollbar::-webkit-scrollbar { width: 8px; }
+.hint-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.hint-scrollbar::-webkit-scrollbar-thumb { background: #9ca3af; border-radius: 4px; }
+.hint-scrollbar::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+
+@keyframes fadeSlideDown {
+	0% { opacity: 0; transform: translateY(-6px); }
+	100% { opacity: 1; transform: translateY(0); }
+}

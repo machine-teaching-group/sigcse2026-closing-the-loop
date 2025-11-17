@@ -1,0 +1,384 @@
+/*
+    See the JupyterLab Developer Guide for useful CSS Patterns:
+
+    https://jupyterlab.readthedocs.io/en/stable/developer/css.html
+*/
+
+/* Hint Request Bar */
+.hint-request-bar {
+  background-color: #f5f5f5;
+  display: flex;
+  margin: 10px auto 10px 72px;
+  justify-content: space-between;
+  border: 1px solid #e0e0e0;
+  padding: 5px 10px;
+}
+
+.hint-request-bar-left {
+  display: flex;
+  width: 40%;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.hint-request-bar-left-text {
+  font-size: 14px;
+  line-height: 1.2;
+  color: #444;
+}
+
+.hint-request-bar-left-info-button {
+  width: 25px;
+  height: 25px;
+  background-color: #ccc;
+  border: 0.5px solid #e0e0e0;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  margin-left: 10px;
+}
+
+.hint-request-bar-right {
+  display: flex;
+  justify-content: flex-end;
+  width: 60%;
+}
+
+.hint-request-bar-right-request-button {
+  width: 60%;
+  display: inline-block;
+  background-color: #1976d2;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.2;
+  margin: 6px auto;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.hint-info {
+  line-height: 40px;
+}
+
+.hint-info span {
+  width: 100px;
+}
+
+.planning {
+  background-color: #81c0ff;
+}
+
+.debugging {
+  background-color: #f87b7b;
+}
+
+.optimizing {
+  background-color: #7fc47f;
+}
+
+/* Hint History Bar */
+.hint-history-bar {
+  background-color: #f5f5f5;
+  margin: 10px auto 10px 72px;
+  border: 1px solid #e0e0e0;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+  background-color: #f5f5f5;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+.ta-accordion {
+  background-color: #f5f5f5;
+}
+
+.accordion-error {
+  background-color: #eddddd;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active,
+.accordion:hover,
+.ta-accordion:hover {
+  background-color: #ccc;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.accordion-panel {
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  padding: 0 18px 0 18px;
+}
+
+/* History small helpers moved from inline styles */
+.history-id {
+  margin-right: 8px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.history-rating {
+  margin-left: 8px;
+  font-size: 0.95em;
+}
+
+.history-edge {
+  color: #9CA3AF;
+  /* tailwind gray-400 */
+  font-weight: 400;
+  margin-left: 8px;
+  font-size: 0.9em;
+}
+
+.accordion:after,
+.ta-accordion:after {
+  content: '\02795';
+  /* Unicode character for "plus" sign (+) */
+  font-size: 14px;
+  color: #777;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: '\2796';
+  /* Unicode character for "minus" sign (-) */
+}
+
+/* Hint Banner */
+:root {
+  --hint-banner-height: 30vh;
+}
+
+#hint-banner-placeholder {
+  width: 100%;
+  height: var(--hint-banner-height);
+  background-color: #fff;
+}
+
+#hint-banner {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  top: 29px;
+  width: calc(100% - 32px);
+  height: calc(var(--hint-banner-height));
+  margin: 0 auto;
+  padding: 0 20px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  color: black;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  overflow-y: auto;
+}
+
+#hint-banner p {
+  display: flex;
+  align-items: center;
+}
+
+/* Content area: vertically centered, left aligned */
+#hint-banner-content {
+  display: flex;
+  align-items: center;
+  /* vertical center within available height */
+  padding: 12px 16px;
+  flex: 1 1 auto;
+}
+
+#hint-banner-content p {
+  margin: 0;
+  white-space: pre-wrap;
+  /* preserve newlines like web */
+}
+
+.loader {
+  width: 24px;
+  height: 24px;
+  margin-right: 50px;
+  border: 3px solid #1976d2;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#hint-banner-buttons-container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  /* right align buttons */
+  gap: 8px;
+  padding: 8px 0px;
+  /* bottom bar padding */
+  margin-top: auto;
+  /* push to bottom */
+  border-top: 1px solid #e5e7eb;
+  /* subtle divider like web */
+  background-color: #f9fafb;
+  /* light background like web */
+}
+
+/* Top title row above the hint content. Mirrors the bottom buttons container background. */
+#hint-banner-title-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 0px;
+  width: 100%;
+  background-color: #f9fafb;
+  /* same as buttons container */
+  border-bottom: 1px solid #e5e7eb;
+  /* subtle divider */
+}
+
+.hint-banner-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #6b7280;
+  /* gray-500 */
+  letter-spacing: 0.05em;
+}
+
+/* Escalation-specific content layout: stack items vertically */
+.hint-banner-escalation {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 12px 16px;
+  gap: 8px;
+  flex: 1 1 auto;
+}
+
+/* More specific selector to override the base #hint-banner-content rules when
+   the escalation modifier class is present. This ensures class-based styling
+   matches the inline style behavior that previously forced column layout. */
+#hint-banner-content.hint-banner-escalation {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 12px 16px;
+  gap: 8px;
+  flex: 1 1 auto;
+}
+
+.hint-banner-button {
+  background-color: #1976d2;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.2;
+  margin: 6px;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Rating button variants to mirror web colors */
+.hint-button-helpful {
+  background-color: #059669;
+  /* background-color: #4851f6;  */
+}
+
+.hint-button-helpful:hover {
+  background-color: #10b981;
+  /* emerald-500 */
+}
+
+.hint-button-unhelpful {
+  background-color: #e11d48;
+  /* background-color: #f8a648; */
+}
+
+.hint-button-unhelpful:hover {
+  background-color: #f43f5e;
+  /* rose-500 */
+}
+
+.hint-banner-cancel-button {
+  background-color: #757575;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.2;
+  margin: 6px;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* When the hint banner is active, visually disable the main hint request buttons */
+body.hint-banner-active .hint-request-bar-right-request-button {
+  background-color: #d1d5db !important;
+  /* gray-300 */
+  color: #6b7280 !important;
+  /* gray-500 */
+  cursor: default !important;
+  opacity: 0.9;
+}
+
+/* Escalate (primary) button */
+.hint-button-escalate {
+  background-color: #4f46e5;
+  /* indigo-600 */
+  color: #fff;
+}
+
+.hint-button-escalate:hover {
+  background-color: #6366f1;
+  /* indigo-500 */
+}
+
+.reflection {
+  width: 400px;
+}
+
+.reflection-input {
+  width: 97%;
+  resize: vertical;
+}
