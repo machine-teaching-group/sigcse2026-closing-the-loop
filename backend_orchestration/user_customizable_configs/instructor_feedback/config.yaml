@@ -1,7 +1,7 @@
 instructors:
   - id: 1
     name: "John Doe"
-    email: "offentlichx1@gmail.com"
+    email: "email-of-the-instructor@gmail.com"
 
 # To save instructors' effort, we do not assign the same feedback request to multiple instructors.
 # However, if a feedback request is shown to one instructor but not processed within the timeout period, it can be reassigned.

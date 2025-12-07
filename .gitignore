@@ -38,7 +38,9 @@ static_root/
 tmp/
 
 # Environment/config caches
-.env*
+.env
+.env.local
+.env.heroku
 .envrc
 **/.env
 .ruff_cache/
