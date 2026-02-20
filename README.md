@@ -399,7 +399,3 @@ jlpm run watch          # rebuilds on source changes
 jupyter lab             # run Jupyterlab
 ```	
 
-
-
-## License
-TBD.
